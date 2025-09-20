@@ -18,24 +18,25 @@ export const createContact = async (payload) => {
 }
 
 export const updateContact = async (contactId, payload, options = {}) => {
-    const rawResult = await ContactsCollection.findOneAndUpdate(
-        { _id: contactId },
+    const contact = await ContactsCollection.findByIdAndUpdate(
+        contactId,
         payload,
         {
             new: true,
             includeResult: true,
             ...options,
         },
-    );
-    if (!rawResult || !rawResult.value) return null;
-    return {
-        contact: rawResult.value,
-        isNew: Boolean(rawResult?.lastErrorObject?.upsert),
-    };
+       
+    ); return contact;
+    // if (!rawResult || !rawResult.value) return null;
+    // return {
+    //     contact: rawResult.value,
+    //     isNew: Boolean(rawResult?.lastErrorObject?.upsert),
+    // };
 };
 
 
 export const deleteContact = async (contactId) => {
-    const contact = await ContactsCollection.findByIdAndDelete({ _id: contactId });
+    const contact = await ContactsCollection.findByIdAndDelete(contactId);
     return contact;
 }

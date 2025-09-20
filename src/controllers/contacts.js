@@ -32,22 +32,25 @@ export const createContactController = async (req, res) => {
         message: 'Successfully created a contact!',
         data: contact,
     });
+
+
 }
 
 export const patchContactController = async (req, res, next) => {
     const { contactId } = req.params;
-    const result = await updateContact(contactId, req.body,{
-        upsert: true,
+    const contact = await updateContact(contactId, req.body,{
+        upsert: false,
+        new: true,
     });
-    if (!result) {
+    if (!contact) {
         next(createHttpError(404, 'Contact not found'));
         return;
     }
-    const status = result.isNew ? 201 : 200;
-    res.status(status).json({
-        status,
+
+    res.status(200).json({
+        status:200,
         message: 'Successfully patched a contact!',
-        data: result.contact,
+        data: contact,
     });
 }
 
@@ -58,6 +61,6 @@ export const deleteContactController = async (req, res, next) => {
         next(createHttpError(404, 'Contact not found')); 
         return;
     }
-    res.status(204).send();
+    res.status(204).end();
 
 }
