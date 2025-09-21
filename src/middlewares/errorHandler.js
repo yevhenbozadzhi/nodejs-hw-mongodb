@@ -1,4 +1,4 @@
-import createHttpError  from 'http-errors';
+import {HttpError}   from 'http-errors';
 
 export const errorHandler = (err, req, res, next) => {
       if (err.name === "ValidationError") {
@@ -7,7 +7,7 @@ export const errorHandler = (err, req, res, next) => {
       message: err.message,
     });
   }
-    if (err instanceof createHttpError ) {
+    if (err instanceof HttpError  ) {
         res.status(err.status).json({
             status: err.status,
             message: err.message,
