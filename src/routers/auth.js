@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { loginUserController, logoutUserController, refreshUsersSessionController, registerUserController } from "../../controllers/auth/auth.js";
-import { validateBody } from "../../middlewares/validateBody.js";
-import { loginUserSchema, registerUserSchema } from "../../validation/auth.js";
+import { loginUserController, logoutUserController, refreshUsersSessionController, registerUserController } from "../controllers/auth.js";
+import { validateBody } from "../middlewares/validateBody.js";
+import { loginUserSchema, registerUserSchema } from "../validation/auth.js";
 
 const router = Router();
 router.post('/register', validateBody(registerUserSchema), registerUserController);

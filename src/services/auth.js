@@ -1,15 +1,15 @@
 import createHttpError from "http-errors";
-import { usersSchemaCollection } from "../../db/models/user.js"
+import { usersSchemaCollection } from "../db/models/user.js"
 import bcrypt from 'bcrypt';
-import { sessionSchemaCollection } from "../../db/models/session.js";
+import { sessionSchemaCollection } from "../db/models/session.js";
 import { randomBytes } from "crypto";
-import { FIFTEEN_MINUTES, THIRTY_DAYS  } from "../../constants/index.js";
+import { FIFTEEN_MINUTES, THIRTY_DAYS  } from "../constants/index.js";
 
 export const registerUser = async (payload) => {
     const user = await usersSchemaCollection.findOne({
         email: payload.email,
     });
-    if (!user) throw createHttpError(409, 'Email in use');
+    if (user) throw createHttpError(409, 'Email in use');
     const encryptedPassword = await bcrypt.hash(payload.password, 10);
     return await usersSchemaCollection.create({
         ...payload,
