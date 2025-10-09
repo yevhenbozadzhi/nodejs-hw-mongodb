@@ -10,6 +10,6 @@ router.post('/login', validateBody(loginUserSchema), loginUserController);
 router.post('/refresh', refreshUsersSessionController);
 router.post('/logout', logoutUserController);
 router.post('/send-reset-email', validateBody(requestResetEmailSchema), requestResetEmailController);
-router.post('/reset-password', validateBody(resetPasswordSchema), resetPasswordController);
+router.post('/reset-pwd', validateBody(resetPasswordSchema), resetPasswordController);
 
 export default router;
