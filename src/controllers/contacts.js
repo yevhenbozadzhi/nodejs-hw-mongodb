@@ -3,6 +3,10 @@ import { createContact, deleteContact, getAllContacts, getContactsId, updateCont
 import { parsePaginationParams } from "../utilits/parsePaginationParams.js";
 import { parseSortParams } from "../utilits/parseSortParams.js";
 import { saveFileToUploadDir } from "../utilits/saveFileToUploadDir.js";
+import { getEnvVar } from "../utilits/getEnvVar.js";
+import { saveFileToCloudinary } from "../utilits/saveFileToCloudinary.js";
+
+
 
 export const getContactsController = async (req, res) => {
     const { page, perPage } = parsePaginationParams(req.query);
@@ -46,8 +50,8 @@ export const createContactController = async (req, res) => {
 
 export const patchContactController = async (req, res, next) => {
     const { contactId } = req.params;
-    const photo = req.file;
     const userId = req.user._id;
+      const photo = req.file;
 
     let photoUrl;
     if (photo) {
@@ -57,15 +61,6 @@ export const patchContactController = async (req, res, next) => {
       photoUrl = await saveFileToUploadDir(photo);
     }
     }
-    if (!result) {
-        next(createHttpError(404, 'Contact not found'));
-        return;
-    }
-    res.json({
-        status: 200,
-        message: 'Successfully patched a contact!',
-        data: result.contact,
-    });
     const contact = await updateContact(userId, contactId, {
         ...req.body,
         photo: photoUrl,
