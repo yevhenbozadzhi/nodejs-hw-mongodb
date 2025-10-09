@@ -51,12 +51,12 @@ export const patchContactController = async (req, res, next) => {
 
     let photoUrl;
     if (photo) {
-        photoUrl = await saveFileToUploadDir(photo);
+      if (getEnvVar('ENABLE_CLOUDINARY') === 'true') {
+      photoUrl = await saveFileToCloudinary(photo);
+    } else {
+      photoUrl = await saveFileToUploadDir(photo);
     }
-    // const result = await updateContact(contactId, {
-    //     ...req.body,
-    //     photo: photoUrl,
-    // });
+    }
     if (!result) {
         next(createHttpError(404, 'Contact not found'));
         return;
