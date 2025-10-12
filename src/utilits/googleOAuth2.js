@@ -8,6 +8,8 @@ import createHttpError from 'http-errors';
 
 const PATH_JSON = path.join(process.cwd(), 'google-oauth.json');
 const oauthConfig = JSON.parse(await readFile(PATH_JSON));
+
+
 const googleOAuthClient = new OAuth2Client({
     client_id: getEnvVar('GOOGLE_AUTH_CLIENT_ID'),
     client_secret: getEnvVar('GOOGLE_AUTH_CLIENT_SECRET'),
