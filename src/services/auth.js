@@ -10,6 +10,7 @@ import { FIFTEEN_MINUTES, SMTP, TEMPLATES_DIR, THIRTY_DAYS  } from "../constants
 import jwt from "jsonwebtoken";
 import { getEnvVar } from '../utilits/getEnvVar.js';
 import { sendEmail } from "../utilits/sendMail.js";
+import { getFullNameFromGoogleTokenPayload, validateCode } from '../utilits/googleOAuth2.js';
 
 export const registerUser = async (payload) => {
     const user = await usersSchemaCollection.findOne({
@@ -148,4 +149,31 @@ export const resetPassword = async (payload) => {
         _id: user._id
     },
         { password: encryptedPassword },);
+};
+
+export const loginOrSignUpWithGoogle = async (code) => {
+    const loginTicket = await validateCode(code);
+    const payload = loginTicket.getPayload();
+    if (!payload) throw createHttpError(401);
+
+    let user = await usersSchemaCollection.findOne({
+        email: payload.email
+    });
+
+    if (!user) {
+        const password = await bcrypt.hash(randomBytes(10), 10);
+        user = await usersSchemaCollection.create({
+            email: payload.email,
+            name: getFullNameFromGoogleTokenPayload(payload),
+            password,
+            role: 'parent',
+        });
+
+    }
+
+    const newSession = createSession();
+    return await sessionSchemaCollection.create({
+        userId: user._id,
+        ...newSession,
+    });
 };
