@@ -6,7 +6,7 @@ import fs from 'node:fs';
 export const swaggerDocs = () => {
     try {
         const swaggerDoc = JSON.parse(fs.readFileSync(SWAGGER_PATH).toString());
-        return [...swaggerUI.server, swaggerUI.setup(swaggerDoc)];
+        return [...swaggerUI.serve, swaggerUI.setup(swaggerDoc)];
     }
     catch (err) {
         return (req, res, next) => {
