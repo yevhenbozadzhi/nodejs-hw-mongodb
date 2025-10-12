@@ -1,5 +1,6 @@
 #env
 *.env
+echo "google-oauth.json" >> .gitignore
 
 # Logs
 logs
