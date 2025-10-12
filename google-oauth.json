@@ -1,9 +1,0 @@
-{"web":
-{"client_id":"714521781491-dtdmpks87v8r248cjhas9q9gs4fcf7o1.apps.googleusercontent.com",
-"project_id":"contacts-app-474822","auth_uri":"https://accounts.google.com/o/oauth2/auth",
-"token_uri":"https://oauth2.googleapis.com/token",
-"auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
-"client_secret":"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",
-"redirect_uris":["https://nodejs-hw-mongodb-mw37.onrender.com","https://localhost:3000/confirm-google-auth"]
-}
-}
