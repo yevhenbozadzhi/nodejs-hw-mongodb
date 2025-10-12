@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { getGoogleOAuthUrlController, loginUserController, loginWithGoogleController, logoutUserController, refreshUsersSessionController, registerUserController, requestResetEmailController, resetPasswordController } from "../controllers/auth.js";
 import { validateBody } from "../middlewares/validateBody.js";
-import { loginUserSchema, loginWithGoogleOAuthShema, registerUserSchema, requestResetEmailSchema, resetPasswordSchema } from "../validation/auth.js";
+import { loginUserSchema, loginWithGoogleOAuthSchema, registerUserSchema, requestResetEmailSchema, resetPasswordSchema } from "../validation/auth.js";
 
 
 const router = Router();
