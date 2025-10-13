@@ -41,9 +41,30 @@ responses:
             status:
               type: integer
               example: 200
+            message:
+              type: string
+              example: Success
             data:
-              type: array
-              items:
-                $ref: ../../components/schemas/contacts.yaml
+              type: object
+              properties:
+                contacts:
+                  type: array
+                  items:
+                    $ref: ../../components/schemas/contacts.yaml
+                paginationData:
+                  type: object
+                  properties:
+                    page:
+                      type: integer
+                      example: 1
+                    perPage:
+                      type: integer
+                      example: 10
+                    total:
+                      type: integer
+                      example: 50
+                    totalPages:
+                      type: integer
+                      example: 5
   '404':
     $ref: ../../components/responses/404.yaml
