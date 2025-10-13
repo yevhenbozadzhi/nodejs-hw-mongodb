@@ -45,19 +45,16 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "contacts": {
+                        "data": {
                           "type": "array",
                           "items": { "$ref": "#/components/schemas/contact" }
                         },
-                        "paginationData": {
-                          "type": "object",
-                          "properties": {
-                            "page": { "type": "integer", "example": 1 },
-                            "perPage": { "type": "integer", "example": 10 },
-                            "total": { "type": "integer", "example": 50 },
-                            "totalPages": { "type": "integer", "example": 5 }
-                          }
-                        }
+                        "page": { "type": "integer", "example": 1 },
+                        "perPage": { "type": "integer", "example": 10 },
+                        "totalItems": { "type": "integer", "example": 50 },
+                        "totalPages": { "type": "integer", "example": 5 },
+                        "hasNextPage": { "type": "boolean", "example": true },
+                        "hasPreviousPage": { "type": "boolean", "example": false }
                       }
                     }
                   }

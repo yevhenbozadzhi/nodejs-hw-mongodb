@@ -9,18 +9,17 @@ import { saveFileToCloudinary } from "../utilits/saveFileToCloudinary.js";
 
 
 export const getContactsController = async (req, res) => {
-    const { page, perPage } = parsePaginationParams(req.query);
-    const { sortBy, sortOrder } = parseSortParams(req.query);
-    const userId = req.user._id;
-    const {data: contacts, paginationData} = await getAllContacts({
-       userId, page, perPage, sortBy, sortOrder,
-    });
-    res.json({
-        status: 200,
-        message: 'Success',
-        data: {contacts, paginationData},
-    });
-
+  const { page, perPage } = parsePaginationParams(req.query);
+  const { sortBy, sortOrder } = parseSortParams(req.query);
+  const userId = req.user._id;
+  const contacts = await getAllContacts({
+    userId, page, perPage, sortBy, sortOrder,
+  });
+  res.json({
+    status: 200,
+    message: 'Success',
+    data: contacts,
+  });
 }
 
 export const getContactsIdController = async (req, res) => {

@@ -47,24 +47,27 @@ responses:
             data:
               type: object
               properties:
-                contacts:
+                data:
                   type: array
                   items:
-                    $ref: ../../components/schemas/contacts.yaml
-                paginationData:
-                  type: object
-                  properties:
-                    page:
-                      type: integer
-                      example: 1
-                    perPage:
-                      type: integer
-                      example: 10
-                    total:
-                      type: integer
-                      example: 50
-                    totalPages:
-                      type: integer
-                      example: 5
+                    $ref: '#/components/schemas/contact'
+                page:
+                  type: integer
+                  example: 1
+                perPage:
+                  type: integer
+                  example: 10
+                totalItems:
+                  type: integer
+                  example: 50
+                totalPages:
+                  type: integer
+                  example: 5
+                hasNextPage:
+                  type: boolean
+                  example: true
+                hasPreviousPage:
+                  type: boolean
+                  example: false
   '404':
-    $ref: ../../components/responses/404.yaml
+    $ref: '#/components/responses/404'
